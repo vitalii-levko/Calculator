@@ -1,63 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Calculator</title>
+  <title>Calculator app — Vue.js</title>
   <meta charset=utf-8>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
-<div id="app" class="container">
-  <div class="row justify-content-center">
-    <div class="center-block text-center">
-      <template v-if="turn === 'On'">
-        <input v-model="txt"
-          disabled 
-          placeholder="Calculator"
-        >    
-      </template>
-      <template v-else>
-        <input v-model="txt"
-          readonly
-          placeholder="0"
-        > 
-      </template>
-      <control v-bind:func="trn" v-bind:turn="turn"></control>
-    </div>
-  </div>
-  <div v-if="turn === 'Off'">
-    <div class="row justify-content-center">
-      <span v-on:click="clr()" v-bind:class="clsBtn">C</span>
-      <span v-on:click="bck" v-bind:class="clsBtn">←</span>
-      <span v-on:click="sqr()" v-bind:class="clsBtn">√</span>
-      <span v-on:click="div(false)" v-bind:class="clsBtn">÷</span>
-    </div>
-    <div class="row justify-content-center">
-      <span v-on:click="put(7)" v-bind:class="clsBtn">7</span>
-      <span v-on:click="put(8)" v-bind:class="clsBtn">8</span>
-      <span v-on:click="put(9)" v-bind:class="clsBtn">9</span>
-      <span v-on:click="mul(false)" v-bind:class="clsBtn">*</span>
-    </div>
-    <div class="row justify-content-center">
-      <span v-on:click="put(4)" v-bind:class="clsBtn">4</span>
-      <span v-on:click="put(5)" v-bind:class="clsBtn">5</span>
-      <span v-on:click="put(6)" v-bind:class="clsBtn">6</span>
-      <span v-on:click="sub(false)" v-bind:class="clsBtn">-</span>
-    </div>
-    <div class="row justify-content-center">
-      <span v-on:click="put(1)" v-bind:class="clsBtn">1</span>
-      <span v-on:click="put(2)" v-bind:class="clsBtn">2</span>
-      <span v-on:click="put(3)" v-bind:class="clsBtn">3</span>
-      <span v-on:click="sum(false)" v-bind:class="clsBtn">+</span>
-    </div>
-    <div class="row justify-content-center">
-      <span v-on:click="inv()" v-bind:class="clsBtn">±</span>
-      <span v-on:click="put(0)" v-bind:class="clsBtn">0</span>
-      <span v-on:click="put('.')" v-bind:class="clsBtn">.</span>
-      <span v-on:click="res" v-bind:class="clsBtn">=</span>
-    </div>
-  </div>
-</div>
-<script src="index.js"></script>
+<div id="app"></div>
+<script src="dist/build.js"></script>
 </body>
 </html>
