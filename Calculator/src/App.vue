@@ -56,28 +56,28 @@
             { id: 1, title: 'C', act: 'clr', value: '', cls: 'clsBtn' },
             { id: 2, title: '←', act: 'bck', value: '', cls: 'clsBtn' },
             { id: 3, title: '√', act: 'sqr', value: '', cls: 'clsBtn' },
-            { id: 4, title: '÷', act: 'div', value: false, cls: 'clsBtn' }]}, {
+            { id: 4, title: '÷', act: 'div', value: '', cls: 'clsBtn' }]}, {
           id: 2,
           cls: 'clsRow',
           items: [
             { id: 5, title: '7', act: 'put', value: '7', cls: 'clsBtn' },
             { id: 6, title: '8', act: 'put', value: '8', cls: 'clsBtn' },
             { id: 7, title: '9', act: 'put', value: '9', cls: 'clsBtn' },
-            { id: 8, title: '*', act: 'mul', value: false, cls: 'clsBtn' }]}, {
+            { id: 8, title: '*', act: 'mul', value: '', cls: 'clsBtn' }]}, {
           id: 3,
           cls: 'clsRow',
           items: [
             { id: 9, title: '4', act: 'put', value: '4', cls: 'clsBtn' },
             { id: 10, title: '5', act: 'put', value: '5', cls: 'clsBtn' },
             { id: 11, title: '6', act: 'put', value: '6', cls: 'clsBtn' },
-            { id: 12, title: '-', act: 'sub', value: false, cls: 'clsBtn' }]}, {
+            { id: 12, title: '-', act: 'sub', value: '', cls: 'clsBtn' }]}, {
           id: 4,
           cls: 'clsRow',
           items: [
             { id: 13, title: '1', act: 'put', value: '1', cls: 'clsBtn' },
             { id: 14, title: '2', act: 'put', value: '2', cls: 'clsBtn' },
             { id: 15, title: '3', act: 'put', value: '3', cls: 'clsBtn' },
-            { id: 16, title: '+', act: 'sum', value: false, cls: 'clsBtn' }]}, {
+            { id: 16, title: '+', act: 'sum', value: '', cls: 'clsBtn' }]}, {
           id: 5,
           cls: 'clsRow',
           items: [
@@ -146,7 +146,7 @@
       },
 
       div(fromRes) {
-        if (this.op && this.two && this.toOp) {
+        if (this.op === this.div && this.two && this.toOp) {
           if (!parseFloat(this.two)) {
             this.txt = 'Cannot divide by zero'
             this.one = ''
@@ -162,6 +162,10 @@
           }
           this.toOp = false
         }
+        else if (this.op !== this.div && this.two && this.toOp) {
+          this.op(false)
+          this.op = this.div
+        }
         else if (this.txt) {
           this.op = this.div
           if (!fromRes) {
@@ -173,13 +177,17 @@
       },
 
       mul(fromRes) {
-        if (this.op && this.two && this.toOp) {
+        if (this.op === this.mul && this.two && this.toOp) {
           this.txt = String(parseFloat(this.one) * parseFloat(this.two))
           this.one = this.txt
           if (!fromRes) {
             this.two = ''
           }
           this.toOp = false
+        }
+        else if (this.op !== this.mul && this.two && this.toOp) {
+          this.op(false)
+          this.op = this.mul
         }
         else if (this.txt) {
           this.op = this.mul
@@ -192,13 +200,17 @@
       },
 
       sub(fromRes) {
-        if (this.op && this.two && this.toOp) {
+        if (this.op === this.sub && this.two && this.toOp) {
           this.txt = String(parseFloat(this.one) - parseFloat(this.two))
           this.one = this.txt
           if (!fromRes) {
             this.two = ''
           }
           this.toOp = false
+        }
+        else if (this.op !== this.sub && this.two && this.toOp) {
+          this.op(false)
+          this.op = this.sub
         }
         else if (this.txt) {
           this.op = this.sub
@@ -237,19 +249,23 @@
         else {
           this.two = this.txt
           if (this.op) {
-            this.toOp = false
+            this.toOp = true
           }
         }
       },
 
       sum(fromRes) {
-        if (this.op && this.two && this.toOp) {
+        if (this.op === this.sum && this.two && this.toOp) {
           this.txt = String(parseFloat(this.one) + parseFloat(this.two))
           this.one = this.txt
           if (!fromRes) {
             this.two = ''
           }
           this.toOp = false
+        }
+        else if (this.op !== this.sum && this.two && this.toOp) {
+          this.op(false)
+          this.op = this.sum
         }
         else if (this.txt) {
           this.op = this.sum
